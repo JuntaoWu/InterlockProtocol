@@ -1,9 +1,9 @@
-#ifndef _OUTPUT_HANDLER_H
-#define _OUTPUT_HANDLER_H
+#ifndef _OUTPUT_HANDLER_H_
+#define _OUTPUT_HANDLER_H_
 
 #include <ace/OS.h>
-#include <ace/Connector.h>
 #include <ace/Get_Opt.h>
+#include <ace/Connector.h>
 #include <ace/SOCK_Connector.h>
 #include <ace/Svc_Handler.h>
 #include <ace/Synch.h>
@@ -17,8 +17,6 @@
 #include <ace/Time_Value.h>
 
 #include <ace/Signal.h>
-
-#include "ClientDaemonConnector.h"
 
 class ClientDaemonConnector;
 
@@ -49,4 +47,4 @@ protected:
 #define FLUSH_TIMEOUT 120
 #endif //!FLUSH_TIMEOUT
 
-#endif // !_OUTPUT_HANDLER_H
+#endif // !_OUTPUT_HANDLER_H_

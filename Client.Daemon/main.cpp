@@ -1,7 +1,6 @@
 // Client.Daemon.cpp : Defines the entry point for the console application.
 //
 
-#include "stdafx.h"
 #include <ace/OS.h>
 #include <ace/Reactor.h>
 #include <ace/Select_Reactor.h>
@@ -23,4 +22,6 @@ int main(int argc, char *argv[])
 	ACE_Reactor::instance()->run_reactor_event_loop();
     return 0;
 }
+
+ACE_FACTORY_DEFINE(ACE_Local_Service, ClientDaemon)
 

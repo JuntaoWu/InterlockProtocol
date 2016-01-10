@@ -1,4 +1,5 @@
 #include "OutputHandler.h"
+#include "ClientDaemonConnector.h"
 
 OutputHandler::OutputHandler()
 {
@@ -38,6 +39,11 @@ int OutputHandler::put(ACE_Message_Block * block, ACE_Time_Value * timeout)
 		}
 	}
 	return result;
+}
+
+int OutputHandler::handle_input(ACE_HANDLE handle)
+{
+	return 0;
 }
 
 int OutputHandler::svc()
@@ -80,7 +86,7 @@ int OutputHandler::svc()
 			++message_index;
 		}
 
-		if (message_index >= ACE_IOV_MAX || (ACE_OS::gettimeofday() - time_of_last_send >= FLUSH_TIMEOUT)) {
+		if (message_index >= ACE_IOV_MAX || (ACE_OS::gettimeofday() - time_of_last_send >= ACE_Time_Value(FLUSH_TIMEOUT))) {
 			if (send(chunk, message_index) == -1) {
 				break;
 			}
@@ -92,5 +98,10 @@ int OutputHandler::svc()
 		send(chunk, message_index);
 	}
 	no_sigpipe.restore_action(SIGPIPE, original_action);
+	return 0;
+}
+
+int OutputHandler::send(ACE_Message_Block * chunk[], size_t & count)
+{
 	return 0;
 }

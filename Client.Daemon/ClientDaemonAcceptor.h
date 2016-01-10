@@ -1,5 +1,5 @@
-#ifndef _CLIENT_DAEMON_ACCEPTOR_H
-#define _CLIENT_DAEMON_ACCEPTOR_H
+#ifndef _CLIENT_DAEMON_ACCEPTOR_H_
+#define _CLIENT_DAEMON_ACCEPTOR_H_
 
 #include <ace/Acceptor.h>
 #include <ace/SOCK_Acceptor.h>
@@ -7,12 +7,12 @@
 
 class InputHandler;
 
-class ClientDaemonAcceptor : public ACE_Acceptor<InputHandler, ACE_SOCK_ACCEPTOR>
+class ClientDaemonAcceptor : public ACE_Acceptor<InputHandler, ACE_SOCK_Acceptor>
 {
 protected:
 	InputHandler input_handler_;
 public:
-	typedef ACE_Acceptor<InputHandler, ACE_SOCK_ACCEPTOR> base;
+	typedef ACE_Acceptor<InputHandler, ACE_SOCK_Acceptor> base;
 	ClientDaemonAcceptor();
 	~ClientDaemonAcceptor();
 
@@ -22,4 +22,4 @@ public:
 	ACE_INET_Addr local_address() { return peer_acceptor_addr_; }
 };
 
-#endif //!_CLIENT_DAEMON_ACCEPTOR_H
+#endif //!_CLIENT_DAEMON_ACCEPTOR_H_

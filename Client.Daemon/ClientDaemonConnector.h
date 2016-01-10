@@ -1,10 +1,10 @@
-#ifndef _CLIENT_DAEMON_CONNECTOR_H
-#define _CLIENT_DAEMON_CONNECTOR_H
+#ifndef _CLIENT_DAEMON_CONNECTOR_H_
+#define _CLIENT_DAEMON_CONNECTOR_H_
 
 #include <ace/Connector.h>
 #include <ace/Sock_Connector.h>
 
-class OutputHandler;
+#include "OutputHandler.h"
 
 class ClientDaemonConnector : public ACE_Connector<OutputHandler, ACE_SOCK_Connector>
 {
@@ -14,7 +14,6 @@ protected:
 public:
 	typedef ACE_Connector<OutputHandler, ACE_SOCK_Connector> PARENT;
 	
-	ClientDaemonConnector() {}
 	ClientDaemonConnector(OutputHandler *handler = 0) : handler_(handler) {}
 	
 	~ClientDaemonConnector();
@@ -31,4 +30,4 @@ protected:
 		int reuse_addr, int flags, int perms);
 };
 
-#endif // !_CLIENT_DAEMON_CONNECTOR_H
+#endif // !_CLIENT_DAEMON_CONNECTOR_H_

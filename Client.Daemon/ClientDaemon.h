@@ -9,6 +9,8 @@
 
 class ClientDaemon : public ACE_Service_Object
 {
+private:
+	ACE_INET_Addr local_addr_;
 protected:
 	ClientDaemonAcceptor acceptor_;
 	ClientDaemonConnector connector_;
@@ -23,7 +25,5 @@ public:
 	virtual int suspend();
 	virtual int resume();
 };
-
-ACE_FACTORY_DEFINE(ACE_Local_Service, ClientDaemon)
 
 #endif // !_CLIENT_DAEMON_H_

@@ -5,7 +5,7 @@
 #include <ace/FILE_Connector.h>
 #include <ace/SOCK_Stream.h>
 
-#include "LogicHandler.h"
+#include "../Common/LogicHandler.h"
 
 class MessageHandler : ACE_Svc_Handler<ACE_SOCK_Stream, ACE_NULL_SYNCH>
 {

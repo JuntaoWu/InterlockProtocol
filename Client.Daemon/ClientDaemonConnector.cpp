@@ -1,12 +1,5 @@
 #include "ClientDaemonConnector.h"
 
-
-
-ClientDaemonConnector::ClientDaemonConnector()
-{
-}
-
-
 ClientDaemonConnector::~ClientDaemonConnector()
 {
 }

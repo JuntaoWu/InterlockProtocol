@@ -1,12 +1,5 @@
 #include "ClientDaemon.h"
 
-
-
-ClientDaemon::ClientDaemon()
-{
-}
-
-
 ClientDaemon::~ClientDaemon()
 {
 }
@@ -18,7 +11,7 @@ int ClientDaemon::init(int argc, ACE_TCHAR * argv[])
 
 	ACE_TCHAR server_daemon_host[MAXHOSTNAMELEN];
 	ACE_OS_String::strcpy(server_daemon_host, ACE_LOCALHOST);
-    
+
 	ACE_Get_Opt get_opt(argc, argv, ACE_TEXT("p:r:s:"), 0);
 	get_opt.long_option(ACE_TEXT("client_port"), 'p', ACE_Get_Opt::ARG_REQUIRED);
 	get_opt.long_option(ACE_TEXT("server_port"), 'r', ACE_Get_Opt::ARG_REQUIRED);
@@ -47,6 +40,7 @@ int ClientDaemon::init(int argc, ACE_TCHAR * argv[])
 	if (acceptor_.open(client_daemon_addr) == -1) {
 		return -1;
 	}
+	local_addr_ = client_daemon_addr;
 
 	OutputHandler *oh = &output_handler_;
 	if (connector_.connect(oh, server_daemon_addr) == -1) {
@@ -66,13 +60,12 @@ int ClientDaemon::fini() {
 
 
 int ClientDaemon::info(ACE_TCHAR **bufferp,
-	size_t length) const {
-	ACE_INET_Addr local_addr;
-	acceptor_.get_local_addr(local_addr);
+	size_t length) const
+{
 
 	ACE_TCHAR buf[BUFSIZ];
 	ACE_OS::sprintf
-		(buf, ACE_TEXT("%hu"), local_addr.get_port_number());
+		(buf, ACE_TEXT("%hu"), local_addr_.get_port_number());
 	ACE_OS::strcat
 		(buf, ACE_TEXT("/tcp # lists services in daemon\n"));
 	if (*bufferp == 0)
