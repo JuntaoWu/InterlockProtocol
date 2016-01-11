@@ -1,20 +1,16 @@
-// Client.Daemon.cpp : Defines the entry point for the console application.
+// ConsoleApplication1.cpp : Defines the entry point for the console application.
 //
 
-#include <ace/OS.h>
+#include "stdafx.h"
 #include <ace/Reactor.h>
-#include <ace/Select_Reactor.h>
 #include <ace/Service_Config.h>
+#include "ServerDaemon.h"
 
-#include "ClientDaemon.h"
-
-
-
-int ACE_TMAIN(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
-	ACE_STATIC_SVC_REGISTER(ClientDaemon);
+	ACE_STATIC_SVC_REGISTER(ServerDaemon);
 
-	ACE_STATIC_SVC_REGISTER(Reporter_Descriptor);
+	ACE_STATIC_SVC_REGISTER(Server_Descriptor);
 
 	ACE_Service_Config::open
 		(argc, argv, ACE_DEFAULT_LOGGER_KEY, 0);
@@ -29,8 +25,6 @@ int ACE_TMAIN(int argc, char *argv[])
 	//ACE_Service_Config::open(argc, argv);
 
 	ACE_Reactor::instance()->run_reactor_event_loop();
-    return 0;
+	return 0;
 }
-
-
 

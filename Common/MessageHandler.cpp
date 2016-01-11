@@ -5,7 +5,7 @@ MessageHandler::~MessageHandler()
 {
 }
 
-int MessageHandler::open()
+int MessageHandler::open(void *)
 {
 	ACE_INET_Addr remote_addr;
 	peer().get_remote_addr(remote_addr);

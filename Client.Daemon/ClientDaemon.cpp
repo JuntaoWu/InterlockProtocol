@@ -1,4 +1,5 @@
 #include "ClientDaemon.h"
+#include <ace/Service_Config.h>
 
 ClientDaemon::~ClientDaemon()
 {
@@ -85,3 +86,21 @@ int ClientDaemon::resume()
 {
 	return reactor()->resume_handler(this);
 }
+
+ACE_FACTORY_DEFINE(ACE_Local_Service, ClientDaemon)
+
+// Define the ACE_Static_Svc_Descriptor that conveys the service information
+// to the ACE_Service_Config.
+ACE_STATIC_SVC_DEFINE(
+	Client_Descriptor,
+	ACE_TEXT("Client_Daemon"),
+	ACE_SVC_OBJ_T,
+	&ACE_SVC_NAME(ClientDaemon),
+	ACE_Service_Type::DELETE_THIS
+	| ACE_Service_Type::DELETE_OBJ,
+	0 // This object is not initially active.
+	)
+
+	// Define the class that will register this service with ACE_Service_Config
+	// at program startup.
+	ACE_STATIC_SVC_REQUIRE(Client_Descriptor)

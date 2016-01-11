@@ -39,12 +39,12 @@ int LogicHandler::HandleRecord()
 	return 0;
 }
 
-inline ACE_SOCK_Stream & LogicHandler::peer()
+ACE_SOCK_Stream & LogicHandler::peer()
 {
 	return peer_;
 }
 
-inline void LogicHandler::SetHandle(ACE_HANDLE handle)
+void LogicHandler::SetHandle(ACE_HANDLE handle)
 {
 	peer_.set_handle(handle);
 }

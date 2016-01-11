@@ -7,7 +7,7 @@
 
 #include "LogicHandler.h"
 
-class MessageHandler : ACE_Svc_Handler<ACE_SOCK_Stream, ACE_NULL_SYNCH>
+class MessageHandler : public ACE_Svc_Handler<ACE_SOCK_Stream, ACE_NULL_SYNCH>
 {
 protected:
 	ACE_FILE_IO log_file_;
@@ -17,7 +17,7 @@ public:
 	MessageHandler() : handler_(log_file_) {}
 	~MessageHandler();
 
-	virtual int open();
+	virtual int open(void *);
 	virtual int svc();
 };
 

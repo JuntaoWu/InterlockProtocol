@@ -4,7 +4,7 @@
 
 #include <ace/SOCK_Acceptor.h>
 #include <ace/Acceptor.h>
-#include "MessageHandler.h"
+#include "../Common/MessageHandler.h"
 
 class MessageAcceptor : public ACE_Acceptor<MessageHandler, ACE_SOCK_Acceptor>
 {
