@@ -15,24 +15,24 @@ ACE_END_VERSIONED_NAMESPACE_DECL
 class LogicHandler
 {
 protected:
-	ACE_FILE_IO &log_file_;
+	ACE_FILE_IO log_file_;
 
 	ACE_SOCK_Stream peer_;
 
 public:
 	ACE_SOCK_Stream &peer();
+	ACE_FILE_IO &log_file();
 
 	void SetHandle(ACE_HANDLE handle);
+	void SetFileName(const char *filename);
 
 public:
 	// Initialization and termination methods.
-	LogicHandler(ACE_FILE_IO &log_file);
+	LogicHandler();
 
 	LogicHandler(ACE_HANDLE handle);
 
-	LogicHandler(ACE_FILE_IO &log_file, ACE_HANDLE handle);
-
-	LogicHandler(ACE_FILE_IO &log_file, const ACE_SOCK_Stream &peer);
+	LogicHandler(const ACE_SOCK_Stream &peer);
 
 	int Close();
 
@@ -51,6 +51,8 @@ public:
 	// Log one record by calling <recv_log_record> and
 	// <write_log_record>.  Returns 0 on success and -1 on failure.
 	int HandleRecord();
+private:
+	void Parse(ACE_Message_Block *block);
 };
 
 #endif /* _LOGGING_HANDLER_H */

@@ -10,11 +10,10 @@
 class MessageHandler : public ACE_Svc_Handler<ACE_SOCK_Stream, ACE_NULL_SYNCH>
 {
 protected:
-	ACE_FILE_IO log_file_;
 	LogicHandler handler_;
 
 public:
-	MessageHandler() : handler_(log_file_) {}
+	MessageHandler() : handler_() {}
 	~MessageHandler();
 
 	virtual int open(void *);

@@ -6,8 +6,13 @@
 #include <ace/Service_Config.h>
 #include "ServerDaemon.h"
 
+#include <iostream>
+using namespace std;
+
 int main(int argc, char *argv[])
 {
+	cout << "Press Enter to start daemon." << endl;
+	cin.get();  //get enter key.
 	ACE_STATIC_SVC_REGISTER(ServerDaemon);
 
 	ACE_STATIC_SVC_REGISTER(Server_Descriptor);

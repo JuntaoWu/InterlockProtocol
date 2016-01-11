@@ -2,7 +2,7 @@
 
 
 
-ClientDaemonAcceptor::ClientDaemonAcceptor()
+ClientDaemonAcceptor::ClientDaemonAcceptor(OutputHandler *handler) : output_handler_(handler), input_handler_(handler)
 {
 }
 

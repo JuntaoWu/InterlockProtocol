@@ -103,5 +103,27 @@ int OutputHandler::svc()
 
 int OutputHandler::send(ACE_Message_Block * chunk[], size_t & count)
 {
-	return 0;
+	iovec iov[ACE_IOV_MAX];
+	size_t iov_size;
+	int result = 0;
+
+	for (iov_size = 0; iov_size < count; ++iov_size) {
+		iov[iov_size].iov_base = chunk[iov_size]->rd_ptr();
+		iov[iov_size].iov_len = chunk[iov_size]->length();
+	}
+
+	while (peer().sendv_n(iov, iov_size) == -1) {
+		if (connector_->reconnect() == -1) {
+			result = -1;
+			break;
+		}
+	}
+
+	while (iov_size > 0) {
+		chunk[--iov_size]->release();
+		chunk[iov_size] = 0;
+	}
+
+	count = iov_size;
+	return result;
 }

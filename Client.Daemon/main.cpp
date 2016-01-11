@@ -8,10 +8,13 @@
 
 #include "ClientDaemon.h"
 
+#include <iostream>
+using namespace std;
 
-
-int ACE_TMAIN(int argc, char *argv[])
+int main(int argc, char *argv[])
 {
+	cout << "Press Enter to start daemon." << endl;
+	cin.get();  //get enter key.
 	ACE_STATIC_SVC_REGISTER(ClientDaemon);
 
 	ACE_STATIC_SVC_REGISTER(Reporter_Descriptor);

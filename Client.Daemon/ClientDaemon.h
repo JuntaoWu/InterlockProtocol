@@ -12,11 +12,11 @@ class ClientDaemon : public ACE_Service_Object
 private:
 	ACE_INET_Addr local_addr_;
 protected:
+	OutputHandler output_handler_;
 	ClientDaemonAcceptor acceptor_;
 	ClientDaemonConnector connector_;
-	OutputHandler output_handler_;
 public:
-	ClientDaemon() : connector_(&output_handler_) {}
+	ClientDaemon() : acceptor_(&output_handler_), connector_(&output_handler_) {}
 	~ClientDaemon();
 
 	virtual int init(int argc, ACE_TCHAR *argv[]);

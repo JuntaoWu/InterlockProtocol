@@ -10,13 +10,15 @@ class InputHandler;
 class ClientDaemonAcceptor : public ACE_Acceptor<InputHandler, ACE_SOCK_Acceptor>
 {
 protected:
+	OutputHandler *output_handler_;
 	InputHandler input_handler_;
 public:
 	typedef ACE_Acceptor<InputHandler, ACE_SOCK_Acceptor> base;
-	ClientDaemonAcceptor();
+	ClientDaemonAcceptor(OutputHandler *handler = 0);
 	~ClientDaemonAcceptor();
 
 	virtual int make_svc_handler(InputHandler * &handler);
+	
 	virtual int handle_close(ACE_HANDLE handle, ACE_Reactor_Mask mask);
 
 	ACE_INET_Addr local_address() { return peer_acceptor_addr_; }
