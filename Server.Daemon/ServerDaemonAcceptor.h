@@ -1,20 +1,18 @@
-#pragma once
-#ifndef _MESSAGE_ACCEPTOR_H
-#define _MESSAGE_ACCEPTOR_H
+#ifndef _SERVER_DAEMON_ACCEPTOR_H
+#define _SERVER_DAEMON_ACCEPTOR_H
 
 #include <ace/SOCK_Acceptor.h>
 #include <ace/Acceptor.h>
 #include "../Common/MessageHandler.h"
 
-class MessageAcceptor : public ACE_Acceptor<MessageHandler, ACE_SOCK_Acceptor>
+class ServerDaemonAcceptor : public ACE_Acceptor<MessageHandler, ACE_SOCK_Acceptor>
 {
 public:
-	MessageAcceptor();
-	MessageAcceptor(ACE_Reactor *r) : PARENT(r) {}
-	
-	virtual ~MessageAcceptor();  // Destructor frees the SSL resources.
+	ServerDaemonAcceptor();
+	ServerDaemonAcceptor(ACE_Reactor *r) : base(r) {}
+	virtual ~ServerDaemonAcceptor();  // Destructor frees the SSL resources.
 
-	typedef ACE_Acceptor<MessageHandler, ACE_SOCK_ACCEPTOR> PARENT;
+	typedef ACE_Acceptor<MessageHandler, ACE_SOCK_ACCEPTOR> base;
 	typedef ACE_SOCK_Acceptor::PEER_ADDR PEER_ADDR;
 
 	// Initialize the acceptor instance.
@@ -29,4 +27,4 @@ public:
 	virtual int accept_svc_handler(MessageHandler *sh);
 };
 
-#endif 
+#endif //!_SERVER_DAEMON_ACCEPTOR_H
